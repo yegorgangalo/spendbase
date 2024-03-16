@@ -43,3 +43,9 @@ $ docker-compose up
 
 Use swagger to do requests
 http://localhost:5005/api/docs
+
+## PgAdmin
+
+Use pgAdmin to administrate DB
+password for spendbase: root
+http://localhost:8080/browser/

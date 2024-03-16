@@ -31,5 +31,21 @@ services:
       - pgdata:/var/lib/postgresql/data
     restart: always
 
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: no
+    container_name: pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT}
+    ports:
+      - "8080:80"
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres-db
+
 volumes:
   pgdata:
+  pgadmin-data:
