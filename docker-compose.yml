@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  nestjs-app:
+    container_name: nestjs-app
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 5005:5005
+      - 9229:9229
+    command: npm run dev
+    depends_on:
+      - postgres-db
+    restart: always
+
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:latest
+    env_file:
+      - .env
+    environment:
+      PG_DATA: /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pgdata:
