@@ -47,5 +47,7 @@ http://localhost:5005/api/docs
 ## PgAdmin
 
 Use pgAdmin to administrate DB
-password for spendbase: root
+PGADMIN_DEFAULT_EMAIL=postgres@mail.com
+PGADMIN_DEFAULT_PASSWORD=admin12
+SPENDBASE_PASSWORD=root
 http://localhost:8080/browser/
