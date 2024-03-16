@@ -34,8 +34,9 @@ $ docker-compose build
 
 ## Running the app
 
+development mode
+
 ```bash
-# development
 $ docker-compose up
 ```
 
