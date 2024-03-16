@@ -31,7 +31,7 @@ export class WeatherService {
       this.httpService.get<Observable<AxiosResponse<any>>>(uri).pipe(
         catchError((error: AxiosError) => {
           console.log(error.response.data);
-          throw 'Weather API error happened!';
+          throw { message: 'Weather API error happened!' };
         }),
       ),
     );
@@ -43,13 +43,13 @@ export class WeatherService {
     });
     if (findRes) {
       await findRes.update({ data: dataForDB });
-      return 'updated';
+      return { message: 'updated' };
     } else {
       await this.weatherModel.create({
         searchValue,
         data: dataForDB,
       });
-      return 'added';
+      return { message: 'added' };
     }
   }
 }
