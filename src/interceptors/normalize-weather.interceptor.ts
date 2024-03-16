@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NormalizedWeatherDto } from 'src/weather/dto/normalized-weather.dto';
+import { NormalizedWeatherDto } from 'src/weather/dto/weather.dto';
 
 interface IWeatherData {
   current: NormalizedWeatherDto;

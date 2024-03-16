@@ -5,10 +5,14 @@ import {
   Body,
   Query,
   UseInterceptors,
+  HttpCode,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags, ApiQuery } from '@nestjs/swagger';
 import { NormalizeWeatherInterceptor } from 'src/interceptors/normalize-weather.interceptor';
-import { NormalizedWeatherDto } from 'src/weather/dto/normalized-weather.dto';
+import {
+  NormalizedWeatherDto,
+  CreateWeatherDto,
+} from 'src/weather/dto/weather.dto';
 import { MessageDto } from 'src/weather/dto/message.dto';
 import { WeatherService } from './weather.service';
 
@@ -19,21 +23,27 @@ export class WeatherController {
 
   @ApiOperation({ summary: 'get already saved weather data from db' })
   @ApiResponse({ status: 200, type: NormalizedWeatherDto })
+  @ApiQuery({ name: 'part', required: false, type: String })
   @Get()
   @UseInterceptors(NormalizeWeatherInterceptor)
   async getWeather(
     @Query('lat') lat: number,
     @Query('lon') lon: number,
-    @Query('part') part: string,
+    @Query('part') part?: string,
   ) {
     const result = await this.weatherService.getWeather({ lat, lon, part });
     return result;
   }
 
   @ApiOperation({ summary: 'Save weather data from weather API to db' })
-  @ApiResponse({ status: 200, type: MessageDto })
+  @ApiResponse({
+    status: 201,
+    type: MessageDto,
+    description: 'The record has been successfully created.',
+  })
+  @HttpCode(201)
   @Post()
-  async postWeather(@Body() body: { lat: number; lon: number; part: string }) {
+  async postWeather(@Body() body: CreateWeatherDto) {
     const { lat, lon, part } = body;
     const result = await this.weatherService.postWeather({ lat, lon, part });
     return result;
