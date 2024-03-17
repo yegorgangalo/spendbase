@@ -57,3 +57,10 @@ SPENDBASE_PASSWORD=root
 ```
 
 <a href="http://localhost:8080/browser/" target="_blank">http://localhost:8080/browser/</a>
+
+## Run tests
+Run unit tests for weather controller and service
+
+```bash
+$ npm run test
+```
