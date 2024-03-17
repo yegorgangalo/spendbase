@@ -8,12 +8,9 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags, ApiQuery } from '@nestjs/swagger';
-import { NormalizeWeatherInterceptor } from 'src/interceptors/normalize-weather.interceptor';
-import {
-  NormalizedWeatherDto,
-  CreateWeatherDto,
-} from 'src/weather/dto/weather.dto';
-import { MessageDto } from 'src/weather/dto/message.dto';
+import { NormalizeWeatherInterceptor } from '../interceptors/normalize-weather.interceptor';
+import { NormalizedWeatherDto, CreateWeatherDto } from './dto/weather.dto';
+import { MessageDto } from './dto/message.dto';
 import { WeatherService } from './weather.service';
 
 @ApiTags('Weather')

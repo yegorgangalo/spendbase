@@ -38,3 +38,7 @@ export class CreateWeatherDto {
   })
   part?: string;
 }
+
+export interface IWeatherData {
+  current: NormalizedWeatherDto;
+}

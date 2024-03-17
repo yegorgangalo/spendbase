@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { AxiosResponse, AxiosError } from 'axios';
 import { Observable, catchError, firstValueFrom } from 'rxjs';
 import { WeatherModel } from './weather.model';
+import { IWeatherData } from './dto/weather.dto';
 
 @Injectable()
 export class WeatherService {
@@ -28,7 +29,7 @@ export class WeatherService {
     const apiKey = this.configService.get<string>('WEATHER_API_KEY');
     const uri = `${apiUrl}?lat=${lat}&lon=${lon}&exclude=${part}&appid=${apiKey}`;
     const { data } = await firstValueFrom(
-      this.httpService.get<Observable<AxiosResponse<any>>>(uri).pipe(
+      this.httpService.get<Observable<AxiosResponse<IWeatherData>>>(uri).pipe(
         catchError((error: AxiosError) => {
           console.log(error.response.data);
           throw { message: 'Weather API error happened!' };

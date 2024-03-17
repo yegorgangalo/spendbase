@@ -6,11 +6,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NormalizedWeatherDto } from 'src/weather/dto/weather.dto';
-
-interface IWeatherData {
-  current: NormalizedWeatherDto;
-}
+import { IWeatherData } from '../weather/dto/weather.dto';
 
 @Injectable()
 export class NormalizeWeatherInterceptor implements NestInterceptor {
